@@ -1,49 +1,54 @@
-### Lab-Report-2---Servers-and-SSH-Keys-Week-3-
-# Part 1
-### Initially: messageCount = 0 and messages is empty since nothing has been added yet.
+# Lab-Report-4---Vim-Week-7-
+For the steps 4-9 from the lab
 
-### First Message Addition
-![Image](CSE15_SS_M1.png)
-#### messageCount = 1 and messages = "1. Hello\n" 
-#### The /add-message request matches the expected path so it calls for public String handleRequest(URI url), adding the string to messages and incrementing the messageCount.
+1) Log into ieng6
+   I type:
+   > ssh cs15lfa23bv@ieng6.ucsd.edu <enter>
+   
+  ![Image](step1.png)
+  
+2) Clone your fork of the repository from your Github account (using the SSH URL)
+    I type:
+   > git clone git@github.com:andrewfrank22/lab7-fork.git <enter>
+   
+   This works only after setting up SSH keys for my ieng6 account in the terminal (as stated in the steps of the lab)
+   
+   ![Image](step2.png)
+   
+3) Run the tests, demonstrating that they fail
+   First, I need to go to the cloned repository
+   
+   ![Image](step3.2.png)
+   
+   > cd lab7-fork <enter>
 
-### Second Message Addition
-![Image](CSE15_SS_M2.png)
-#### Similarly,  messageCount = 2 and messages = "1. Hello\n 2. How are you??"
-#### The /add-message request matches the expected path so it calls for public String handleRequest(URI url), adding the string to messages and incrementing the messageCount.
+  Then, to actually run the tests and analyze the results
+  > bash test.sh <enter>
+  
+   ![Image](step3-1.png)
+   
+4) Edit the code file ListExamples.java to fix the failing test (as a reminder, the error in the code is just that index1 is used instead of index2 in the final loop in merge)
+   First I open the file with vim
+   > vim ListExamples.java
+     
+  Looking at the contents of ListExamples.java, I clicked "j" key 43 times to go down and the "l" key 12 times to go right, finally reaching the line I need to edit.
+  Next, I press "i" key to enter INSERT mode; I press backspace to remove the "1" from "index1" and replace it with a "2"
+ Then, to exit INSERT mode I press
 
-### My Code 
-(I based my code entirely off of the NumberServer.java file from wavelet)
-![Image](String_Code_CS15.png)
+> <esc>
+Finally, I type :wq to save my edits and exit vim. 
 
-### Methods:
-![Image](String_Code_CS15class1.png)
-#### public String handleRequest(URI url) : This method is called by the StringHandler class, if the path includes /add-message it checks for the 's=' query to append whatever string follows. If the query is invalid it outputs an error message. This method keeps track of the number of messages as an integer. "Invalid" is returned when the input includes **/add-message** but does not contain **s=**. "404 Not Found!" is returned.
+![Image](step4.png)
 
-![Image](String_Code_CS15class2.png)
-#### public static void main(String[] args) throws IOException: This method is called by the StringServer class. This method checks for a valid port number as an integer and starts the requested server to that port number, if invalid it will throw an error message.
-#### An invalid input may look like: java StringServer 1023, or java StringServer 50000000, or java StringServer (an empty request); as this class expects an input for args to be between 1024 to 49151. This does not start the server.
-#### A valid input may look like: java StringServer 4000, and this will start the server from the terminal.
+5) Run the tests, demonstrating that they now succeed
+Similar to the 3rd step, to analyze if our edits make the tests run correctly\
+> bash test.sh <enter>
 
-# Part 2
-![Image](Private_CS15.png)
+   ![Image](step5.png)
+   
+6) Commit and push the resulting change to your Github account
+The git add command is necessary to choose what file is getting commited
+> git add ListExamples.java <enter>
 
-#### The path to the *private* key:
-
-> C:\Users\17606\.ssh\id_rsa
-
-![Image](public_cs15.png)
-
-#### The path to the *public* key:
-
->  /home/linux/ieng6/cs15lfa23/cs15lfa23bv/.ssh/authorized_keys
-
-#### My login did not ask for my password!!
-
-![Image](Without_Pass_CS15.png)
-
-
-# Part 3
-
-I learned that there are ieng6 accounts for students and staff at my  university that I can run and save files to. It is amazing that I am capable of running on a remote computer in the Basement Computer Lab!
-In the future I know I will use this feature consistantly as it will allow me to work on multiple devices at ease. 
+And for the actual commit
+> git commit -m "Fixed ListExamples.java for tests" <enter>
