@@ -52,4 +52,5 @@ The git add command is necessary to choose what file is getting commited
 
 And for the actual commit
 > git commit -m "Fixed ListExamples.java for tests" <enter>
+
  ![Image](step6.png)
